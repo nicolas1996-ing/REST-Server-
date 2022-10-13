@@ -12,7 +12,7 @@ class Server {
     // paths
     this.usersPath = "/api/v1/users";
     this.routes();
-    this.port = process.env.PORT;
+    this.port = process.env.PORT || 5000;
   }
 
   async connectBd() {
@@ -31,7 +31,7 @@ class Server {
 
   listen() {
     this.app.listen(this.port, () => {
-      console.log(`App listening on port ${this.port}` || 5000);
+      console.log(`App listening on port ${this.port}`);
     });
   }
 }
