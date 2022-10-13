@@ -12,7 +12,7 @@ class Server {
     // paths
     this.usersPath = "/api/v1/users";
     this.routes();
-    this.port = process.env.PORT || 5000;
+    this.port = process.env.PORT || 8080;
   }
 
   async connectBd() {
