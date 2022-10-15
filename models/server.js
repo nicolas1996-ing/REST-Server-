@@ -27,8 +27,10 @@ class Server {
 
   routes() {
     this.app.use(this.usersPath, require("../routes/users.route"));
-    this.app.use("*", (req, res) => {
-      res.sendFile(path.resolve(__dirname, "./public/index.html"));
+    this.app.get("/api/v1", (req, res) => {
+      res.sendFile(
+        "E:/Nueva_carpeta/Desktop/Auto_Aprendizaje/node/07-rest-server/public/index.html"
+      );
     });
   }
 
