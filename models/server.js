@@ -45,8 +45,8 @@ class Server {
   }
 
   listen() {
-    this.app.listen(this.port, () => {
-      console.log(`App listening on port ${this.port}`);
+    this.app.listen(process.env.PORT || 8080, () => {
+      console.log(`App listening on port ${process.env.PORT || 8080}`);
     });
   }
 }
