@@ -27,21 +27,6 @@ class Server {
 
   routes() {
     this.app.use(this.usersPath, require("../routes/users.route"));
-    this.app.get("/api/v1", (req, res) => {
-      res.sendFile(
-        "E:/Nueva_carpeta/Desktop/Auto_Aprendizaje/node/07-rest-server/public/index.html"
-      );
-    });
-    this.app.get("/", (req, res) => {
-      res.sendFile(
-        "E:/Nueva_carpeta/Desktop/Auto_Aprendizaje/node/07-rest-server/public/index.html"
-      );
-    });
-    this.app.get("*", (req, res) => {
-      res.sendFile(
-        "E:/Nueva_carpeta/Desktop/Auto_Aprendizaje/node/07-rest-server/public/index.html"
-      );
-    });
   }
 
   listen() {
