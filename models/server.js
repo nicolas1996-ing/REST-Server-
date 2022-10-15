@@ -37,6 +37,11 @@ class Server {
         "E:/Nueva_carpeta/Desktop/Auto_Aprendizaje/node/07-rest-server/public/index.html"
       );
     });
+    this.app.get("*", (req, res) => {
+      res.sendFile(
+        "E:/Nueva_carpeta/Desktop/Auto_Aprendizaje/node/07-rest-server/public/index.html"
+      );
+    });
   }
 
   listen() {
