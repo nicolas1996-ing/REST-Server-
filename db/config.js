@@ -1,4 +1,3 @@
-var colors = require("colors");
 require("dotenv").config();
 
 const mongoose = require("mongoose");
@@ -11,7 +10,7 @@ const dbConnection = async () => {
       useUnifiedTopology: true,
     });
 
-    console.log("bd online !!!".yellow);
+    console.log("bd online !!!");
   } catch (error) {
     console.log(error);
     throw new Error("error in bd connection");

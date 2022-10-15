@@ -15,7 +15,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "colors": "^1.4.0",
     "nodemon": "^2.0.20"
   },
   "dependencies": {
