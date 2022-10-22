@@ -11,6 +11,7 @@ class Server {
 
     // paths
     this.usersPath = "/api/v1/users";
+    this.authPath = "/api/v1/auth"; // login
     this.routes();
     this.port = process.env.PORT || 8080;
   }
@@ -26,9 +27,11 @@ class Server {
   }
 
   routes() {
-    this.app.use(this.usersPath, require("../routes/users.route"));
+    this.app.use(this.authPath, require("../routes/auth.route")); // login ...api/v1/auth
+    this.app.use(this.usersPath, require("../routes/users.route")); // ...api/v1/users
   }
 
+  // init server
   listen() {
     this.app.listen(this.port, () => {
       console.log(`App listening on port ${this.port}`);

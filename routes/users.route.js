@@ -12,6 +12,11 @@ const {
   existEmail,
   existUserById,
 } = require("../helpers/db.validator");
+const { ROLES } = require("../models/shared.enums.models");
+
+// same routes imports, unificar immportaciones
+const { verifyAdminRole, validateJWT, verifyRole } = require("../middlewares"); // busca el archivo index.js
+
 const { schemaValidator } = require("../middlewares/schemaValidator");
 const router = Router();
 
@@ -48,6 +53,10 @@ router.patch("/:id", updateUserPartial);
 router.delete(
   "/:id",
   [
+    validateJWT,
+    // verifyAdminRole, // must be ADMIN
+    // verifyRole(ROLES.ADMIN, ROLES.USER), // should be ADMIN or USER
+    verifyRole(ROLES.ADMIN), // must be ADMIN
     check("id", "invalid Id").isMongoId(),
     check("id").custom(existUserById),
     schemaValidator,

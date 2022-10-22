@@ -135,12 +135,14 @@ const deleteUser = async (req, res) => {
   try {
     // await User.findByIdAndDelete(id); // permanente
     const user = await User.findByIdAndUpdate(id, { state: false });
+    const deletedBy = req.userAuth;
 
     res.status(203).json({
       success: true,
       message: "user has been archived",
       method: "delete",
       user,
+      deletedBy,
     });
   } catch (error) {
     res.status(500).json({

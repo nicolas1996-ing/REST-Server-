@@ -34,7 +34,8 @@ const userSheema = Schema({
 
 // custom methods
 userSheema.methods.toJSON = function () {
-  const { password, __v, ...others } = this.toObject();
+  const { password, __v, _id, ...others } = this.toObject();
+  others.uid = _id;
   return others;
 };
 
