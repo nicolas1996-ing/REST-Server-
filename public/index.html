@@ -32,13 +32,19 @@
         // console.log("token google", response.credential);
         const body = { id_token: response.credential };
         // fetch("http://localhost:3001/api/v1/auth/google", {
-        fetch("https://rest-server-app-node-01.herokuapp.com/api/v1/auth/google", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        })
+        // fetch("https://rest-server-app-node-01.herokuapp.com/api/v1/auth/google", {
+        fetch(
+          window.location.hostname.includes("localhost")
+            ? "http://localhost:3001/api/v1/auth/google"
+            : "https://rest-server-app-node-01.herokuapp.com/api/v1/auth/google",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+          }
+        )
           .then((resp) => resp.json())
           .then((resp) => {
             console.log(resp.user.email);
