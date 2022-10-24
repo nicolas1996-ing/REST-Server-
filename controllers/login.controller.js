@@ -1,6 +1,7 @@
 const User = require("../models/user.model");
 const bcryptjs = require("bcryptjs");
 const { generateJwt } = require("../helpers/generateJwt");
+const { googleVerify } = require("../helpers/google.validator");
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -69,6 +70,55 @@ const login = async (req, res) => {
   }
 };
 
+const googleSignIn = async (req, res) => {
+  const { id_token } = req.body;
+  try {
+    const googleUser = await googleVerify(id_token);
+
+    // verify if user exist in bd ...
+    let user = await User.findOne({ email: googleUser.email });
+    if (!user) {
+      // create user ...
+      const data = {
+        name: googleUser.name,
+        email: googleUser.email,
+        password: "login-with-google",
+        img: googleUser.picture,
+        createdByGoogle: true,
+      };
+
+      user = new User(data);
+      await user.save(); // save in bd
+    }
+
+    // if user is disabled ( deleted ) ...
+    if (!user.state) {
+      return res.status(401).json({
+        success: false,
+        message: "user is disabled (deleted) ",
+      });
+    }
+
+    // generate jwt ...
+    const token = await generateJwt(user._id, user.email);
+
+    res.status(200).json({
+      success: true,
+      message: "all is good with google sign In",
+      user,
+      token
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "error in login",
+      entity: "POST -> Login",
+      error,
+    });
+  }
+};
+
 module.exports = {
   login,
+  googleSignIn,
 };

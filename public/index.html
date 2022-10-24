@@ -8,5 +8,61 @@
   </head>
   <body>
     <h1>rest server</h1>
+    <div
+      id="g_id_onload"
+      data-client_id="80920594618-g1u9931japn1jtlmgs6bjd9i2hdf08im.apps.googleusercontent.com"
+      data-auto_prompt="false"
+      data-callback="handleCredentialResponse"
+    ></div>
+    <div
+      class="g_id_signin"
+      data-type="standard"
+      data-size="large"
+      data-theme="outline"
+      data-text="sign_in_with"
+      data-shape="rectangular"
+      data-logo_alignment="left"
+    ></div>
+
+    <button id="google_signOut">Sign out</button>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+      function handleCredentialResponse(response) {
+        // console.log("token google", response.credential);
+        const body = { id_token: response.credential };
+        fetch("http://localhost:3001/api/v1/auth/google", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        })
+          .then((resp) => resp.json())
+          .then((resp) => {
+            console.log(resp.user.email);
+            localStorage.setItem("email_course_node", resp.user.email);
+            location.reload();
+          })
+          .catch((error) => console.warn(error));
+      }
+
+      // function
+      const btnSignOut = document.getElementById("google_signOut");
+      btnSignOut.addEventListener("click", () => {
+        // console.log(google.accounts.id);
+
+        // close sesion ...
+        google.accounts.id.disableAutoSelect();
+        google.accounts.id.revoke(
+          localStorage.getItem("email_course_node"),
+          (done) => {
+            localStorage.removeItem("email_course_node");
+            location.reload();
+            console.log("revoke");
+          }
+        );
+      });
+    </script>
   </body>
 </html>
