@@ -12,7 +12,7 @@ const verifyAdminRole = (req, res, next) => {
     }
 
     const { role } = userAuth;
-    console.log(role);
+    // console.log(role);
 
     if (role !== ROLES.ADMIN) {
       return res.status(401).json({

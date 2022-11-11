@@ -1,5 +1,5 @@
 const verifyRole = (...roles) => {
-  console.log(roles);
+  // console.log(roles);
   return (req, res, next) => {
     const { userAuth } = req;
     if (!userAuth) {

@@ -71,7 +71,7 @@ const createUser = async (req, res) => {
       user,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({
       success: false,
       message: "user can not create",

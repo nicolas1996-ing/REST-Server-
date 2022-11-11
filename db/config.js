@@ -10,9 +10,9 @@ const dbConnection = async () => {
       useUnifiedTopology: true,
     });
 
-    console.log("bd online !!!");
+    // console.log("bd online !!!");
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     throw new Error("error in bd connection");
   }
 };

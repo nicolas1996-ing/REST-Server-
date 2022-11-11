@@ -10,8 +10,14 @@ class Server {
     this.middlewares();
 
     // paths
-    this.usersPath = "/api/v1/users";
-    this.authPath = "/api/v1/auth"; // login
+    this.paths = {
+      users: "/api/v1/users",
+      categories: "/api/v1/categories",
+      products: "/api/v1/products",
+      auth: "/api/v1/auth",
+      searchs: "/api/v1/searchs"
+    };
+
     this.routes();
     this.port = process.env.PORT || 8080;
   }
@@ -27,8 +33,11 @@ class Server {
   }
 
   routes() {
-    this.app.use(this.authPath, require("../routes/auth.route")); // login ...api/v1/auth
-    this.app.use(this.usersPath, require("../routes/users.route")); // ...api/v1/users
+    this.app.use(this.paths.auth, require("../routes/auth.route")); // login ...api/v1/auth
+    this.app.use(this.paths.users, require("../routes/users.route")); // ...api/v1/users
+    this.app.use(this.paths.categories, require("../routes/categories.route"));
+    this.app.use(this.paths.products, require("../routes/products.route"));
+    this.app.use(this.paths.searchs, require("../routes/searchs.route"))
   }
 
   // init server
