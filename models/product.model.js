@@ -31,6 +31,9 @@ const ProductSheema = Schema({
     ref: "User",
     require: [true, "created by Id is mandatory"],
   },
+  img: {
+    type: String,
+  },
 });
 
 ProductSheema.methods.toJSON = function () {

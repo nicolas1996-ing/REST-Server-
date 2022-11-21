@@ -49,6 +49,13 @@ const categoryIsDisabled = async (id = "") => {
     throw new Error("category is disabled");
 };
 
+const collectionAllowed = async (collection, allowedCollection) => {
+  if (!allowedCollection.includes(collection))
+    throw new Error("collection no allowed");
+
+  return true;
+};
+
 module.exports = {
   roleValidator,
   existEmail,
@@ -58,4 +65,5 @@ module.exports = {
   userIsActive,
   existProductById,
   existProductByName,
+  collectionAllowed,
 };

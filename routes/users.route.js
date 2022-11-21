@@ -49,6 +49,7 @@ router.put(
   ],
   updateUser
 );
+
 router.patch("/:id", updateUserPartial);
 router.delete(
   "/:id",
